@@ -4,6 +4,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Felipe Bazzarella"]
   gem.email         = ["fbazzarella@gmail.com"]
   gem.description   = %q{Dump and restore PostgreSQL's structure and data.}
+  gem.summary       = %q{Dump and restore PostgreSQL's structure and data.}
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
