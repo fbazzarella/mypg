@@ -1,12 +1,12 @@
 # Mypg
 
-Backup simples para aplicações Rails e bancos de dados PostgreSQL.
+Easy backup for Rails applications with PostgreSQL database.
 
 ## Installation
 
 Add this line into your application's Gemfile:
 
-    gem 'shuttle'
+    gem 'mypg'
 
 Install the gem with Bundler:
 
@@ -16,16 +16,16 @@ Install the gem with Bundler:
 
 And then add some settings:
 
-    $ rails g shuttle:install
+    $ rails g mypg:install
     
 This will create a configuration file in `config/mypg.yml` who looks like this:
 
     # target_directory: '/path/to/backup'
     # files_to_keep:    7
     
-Apenas insira um diretório válido para salvar seus arquivos de backup.
+Just enter a valid directory to save your backup files.
 
-**Note**: Caso não seja especificado a quantidade de arquivos a manter, 7 será o valor padrão.
+**Note**: If not specified, the amount of files that will be saved is 7.
 
 ## How To
 
@@ -35,20 +35,20 @@ Go to your Rails root directory and run this:
 
     $ rake db:backup RAILS_ENV=production
     
-Este comando irá criar um arquivo `.pgsql` no diretório de destino contendo toda a estrutura e os dados do seu banco de dados de produção. Além disso, excluirá os arquivos mais antigos que excederem a quantidade a ser mantida.
+This command will create a `.pgsql` file in the directory with your database's structure and data. Moreover, will delete the older files wich exceed the amount to be saved.
 
 ##### Pro Tip
 
-Você pode criar backups automáticos diariamente, apenas configurando uma tarefa no [Cron](http://crontab.org/):
+You can create automatic daily backups just setting up a task on [Cron](http://crontab.org/):
 
     $ crontab -e
     
-Insira este trecho e salve:
+Insert this and save:
 
     # m h  dom mon dow   command
     0 0 * * * cd ~/my/rails/root && rake db:backup RAILS_ENV=production
     
-Com isso, todos os dias à meia noite (hora do servidor) o Cron irá rodar sua tarefa de backup automaticamente.
+With that, every day in the midnight (server's time) Cron will perform your backup task automatically.
 
 #### Restore
 
@@ -56,10 +56,14 @@ If you wish to restore some saved backup, go to your Rails root directory and ru
 
     $ rake db:restore 'relative/target/directory/to/backup/database_x.pgsql' RAILS_ENV=production
     
-Este comando irá reestruturar o banco de dados de produção e restaurar todos os dados à partir do arquivo.
+This command will restructure the production database and restore all the data from backup file.
 
-**Note**: O caminho para o arquivo de backup deverá ser relativo ao diretório atual no console.
-    
+**Note**: The path for the backup file must be relative to the current directory in the console.
+
+## Thanks
+
+[Leonardo Ávila](http://facebook.com/leuavila) for contributing in the README translation and revision.
+
 ## Contributing
 
 1. Fork it
