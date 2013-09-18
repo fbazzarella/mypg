@@ -17,7 +17,7 @@ namespace :db do
     config = ActiveRecord::Base.configurations[Rails.env]
     file   = "#{config['database']}_#{Time.now.strftime('%Y%m%d%H%M%S')}.pgsql"
 
-    system "PGPASSWORD=#{config['password']} pg_dump --clean -h localhost -U #{config['username']} #{config['database']} > #{Mypg.target_directory}/#{file}"
+    system "PGPASSWORD=#{config['password']} pg_dump --clean -h #{config['host'] || 'localhost'} -U #{config['username']} #{config['database']} > #{Mypg.target_directory}/#{file}"
 
     files = Dir["#{Mypg.target_directory}/*.pgsql"].sort_by{ |f| File.mtime(f) }.reverse
 
