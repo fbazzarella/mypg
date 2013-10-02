@@ -36,7 +36,7 @@ namespace :db do
 
       print "You're in #{Rails.env.titleize}! Are you sure? ".red.bold
 
-      system "psql -h localhost -U #{config['username']} -d #{config['database']} -W < #{file}"
+      system "psql -h #{config['host'] || 'localhost'} -U #{config['username']} -d #{config['database']} -W < #{file}"
 
       puts "Done!".green.bold
     else

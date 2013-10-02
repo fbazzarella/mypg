@@ -1,15 +1,19 @@
 require 'mypg/railtie'
 
 module Mypg
-  def self.target_directory
-    yaml['target_directory'] if yaml.present?
-  end
+  class << self
+    def target_directory
+      if yaml
+        yaml['target_directory'] 
+      end
+    end
 
-  def self.files_to_keep
-    if yaml.present?
-      yaml['files_to_keep']
-    else
-      7
+    def files_to_keep
+      if yaml && yaml['files_to_keep']
+        yaml['files_to_keep']
+      else
+        7
+      end
     end
   end
 
